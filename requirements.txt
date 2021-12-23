@@ -1,0 +1,10 @@
+# In this file list all Python packages that your project needs.
+# When someone else wants to get started with your project sources, they can
+# simple run 'pip install -r requirements.txt' to automatically install them on
+# their machine
+#
+# Every dependency must be on its own line. Note that the '#'-character is used
+# as comment character.
+#
+# The following is a commented example entry, just remove the # to use it
+#pygame
