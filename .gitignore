@@ -25,6 +25,7 @@ wheels/
 # Venv files and directories
 ## in case of an environment in root directory
 pyvenv.cfg
+Include/
 Lib/
 Scripts/
 ## in case of environment in subdirectories
