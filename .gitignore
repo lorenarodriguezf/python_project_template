@@ -21,6 +21,7 @@ sdist/
 wheels/
 *.egg-info/
 *.egg
+*.bundle
 
 # Venv files and directories
 ## in case of an environment in root directory

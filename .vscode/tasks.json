@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Create Virtual environment",
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "python -mvenv .venv",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Bundle for Submission",
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "git bundle create ${workspaceFolderBasename}.bundle --all",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        }
+    ]
+}
