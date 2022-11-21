@@ -1,4 +1,4 @@
-This document contains additional instructions about how to use this Python
+ This document contains additional instructions about how to use this Python
 project template.
 
 Getting Started in VSCode
