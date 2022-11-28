@@ -39,16 +39,23 @@ def pushbutton ():
     zeigenmittel = int(zeigenmittel)
     Hypothek = zkaufpreis - zeigenmittel
     Belehnung = ((zkaufpreis-zeigenmittel) / zkaufpreis) *100
+    Hypothek1 = zkaufpreis * 0.666
+    Amortisationsbetrag = Hypothek - Hypothek1
+    if Amortisationsbetrag > 0:
+        return (Amortisationsbetrag / 15)
+    else:
+        return ("Es ist keine Amortisation notwendig")
+
+#def amortisation (betragprojahr):
+    #if Amortisationsbetrag > 0:
+       # return (Amortisationsbetrag / 15)
+    #else:
+        #return ("Es ist keine Amortisation notwendig")
     print(Hypothek)
     print(Belehnung, "%")
-    #Belehnung = (kaufpreis.text-eigenmittel.text) / kaufpreis.text
-    #print (Hypothek)
-    #print (Belehnung)
+    return (Hypothek1)
+    return (Amortisationsbetrag)
 
-    #zahlen
-    #zeinkommen = int(einkommen)
-    #zkaufpreis = int(kaufpreis)
-    #zeigenmittel = int(eigenmittel)
 button.clicked.connect (pushbutton)
 Hypothek = QLabel("Hypothek")
 layout.addWidget(button)
