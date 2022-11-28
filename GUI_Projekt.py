@@ -1,6 +1,6 @@
 import PyQt5
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPalette
+from PyQt5.QtGui import QPalette, QValidator, QIntValidator
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QPushButton, QVBoxLayout, QFormLayout, QLineEdit
 app = QApplication([])
 app.setStyle('Windows')
@@ -11,11 +11,18 @@ window = QWidget()
 window.setWindowTitle("Hypthekenrechner Gruppe Mix")
 window.setGeometry(600, 600, 480, 180)
 layout = QFormLayout()
-layout.addRow("Kaufpreis:", QLineEdit())
-layout.addRow("Jährliches Einkommen:", QLineEdit())
-layout.addRow("Eigenmittel:", QLineEdit())
-#Signals & Slots -> Pushbutton (In der Funktion definieren - Berechnung und Validierung)
-layout.addWidget(QPushButton('Berechnung'))
+kaufpreis = QLineEdit()
+kaufpreis.setValidator (QIntValidator (1, 10000000, kaufpreis))
+einkommen = QLineEdit()
+einkommen.setValidator(QIntValidator (1, 20000000, einkommen))
+eigenmittel = QLineEdit()
+eigenmittel.setValidator (QIntValidator (1, 10000000, eigenmittel))
+layout.addRow("Kaufpreis:", kaufpreis)
+layout.addRow("Jährliches Einkommen:", einkommen)
+layout.addRow("Eigenmittel:", eigenmittel)
+#Signals & Slots -> Pushbutton (In der Funktion definieren - Berechnung und Validierung / on button click verbinden mit Funktion)
+button = QPushButton ("Berechnen")
+layout.addWidget(button)
 window.setLayout(layout)
 window.setLayout(layout)
 window.show()
