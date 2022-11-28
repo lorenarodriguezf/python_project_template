@@ -9,3 +9,4 @@
 # The following is a commented example entry, just remove the # to use it
 #pygame
 PyQt5
+pyqt5-tools
