@@ -37,14 +37,30 @@ def pushbutton ():
     zkaufpreis = int(zkaufpreis)
     zeinkommen = int(zeinkommen)
     zeigenmittel = int(zeigenmittel)
+    #Berechnungen 
     Hypothek = zkaufpreis - zeigenmittel
     Belehnung = ((zkaufpreis-zeigenmittel) / zkaufpreis) *100
     Hypothek1 = zkaufpreis * 0.666
     Amortisationsbetrag = Hypothek - Hypothek1
+    #Tragbarkeitsberechnung
     if Amortisationsbetrag > 0:
-        return (Amortisationsbetrag / 15)
-    else:
-        return ("Es ist keine Amortisation notwendig")
+        Amortisationsbetragprojahr = Amortisationsbetrag / 15
+
+        
+        if Hypothek1 > Hypothek:
+            Tragbarkeit = (Hypothek * 0.0475 + zkaufpreis * 0.01)/zeinkommen
+            if Hypothek > Hypothek1:
+                (Hypothek1 * 0.0475 + Amortisationsbetrag * 0.0525 + zkaufpreis *0.01 + Amortisationsbetragprojahr) /zeinkommen 
+
+                else:
+                print ("Es ist keine Amortisation notwendig")
+    
+        #belehnungs_wert = ......
+ 
+
+    # Resultate in UI einfügen
+    #belehnung.setText(.....)
+    
 
 #def amortisation (betragprojahr):
     #if Amortisationsbetrag > 0:
@@ -53,8 +69,8 @@ def pushbutton ():
         #return ("Es ist keine Amortisation notwendig")
     print(Hypothek)
     print(Belehnung, "%")
-    return (Hypothek1)
-    return (Amortisationsbetrag)
+    print(Amortisationsbetragprojahr)
+    print(Tragbarkeit)
 
 button.clicked.connect (pushbutton)
 Hypothek = QLabel("Hypothek")
