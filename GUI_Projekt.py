@@ -38,7 +38,9 @@ def pushbutton ():
     zeinkommen = int(zeinkommen)
     zeigenmittel = int(zeigenmittel)
     Hypothek = zkaufpreis - zeigenmittel
+    Belehnung = ((zkaufpreis-zeigenmittel) / zkaufpreis) *100
     print(Hypothek)
+    print(Belehnung, "%")
     #Belehnung = (kaufpreis.text-eigenmittel.text) / kaufpreis.text
     #print (Hypothek)
     #print (Belehnung)
