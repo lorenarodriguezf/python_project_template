@@ -1,11 +1,13 @@
 import PyQt5
+import locale
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QValidator, QIntValidator
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QPushButton, QVBoxLayout, QFormLayout, QLineEdit, QMessageBox
 app = QApplication([])
 app.setStyle('Windows')
+locale.setlocale(locale.LC_ALL, "de_CH")
 palette = QPalette()
-palette.setColor(QPalette.ButtonText, Qt.red)
+palette.setColor(QPalette.ButtonText, Qt.blue)
 app.setPalette(palette)
 window = QWidget() #(main Window)
 window.setWindowTitle("Hypthekenrechner Gruppe Mix")
@@ -61,7 +63,6 @@ Hypothek = QLabel()
 Belehnung = QLabel()
 Tragbarkeit = QLabel()
 Amortisationsbetragprojahr = QLabel()
-
 #button.clicked.connect(function) --> Notwendig, um Funktion mit "Push the button" zu verbinden
 
 #def pushbutton ():
@@ -97,20 +98,30 @@ def pushbutton ():
     ztragbarkeit = ztragbarkeit*100
 
     #belehnungstext = ("Belehnung = ", Belehnung)
-    Hypothek.setText(f"Hypothek = CHF {zHypothek:0.0f}")
+    #Hypothek.setText(f"Hypothek = CHF {zHypothek:0.0f}")
+    Hypothektext = "Hypothek = CHF " + locale.format ("%d", zHypothek, grouping = True)
+    Hypothek.setText(Hypothektext)
     Tragbarkeit.setText(f"Tragbarkeit = {ztragbarkeit:0.2f}%")
     Belehnung.setText(f"Belehnung = {zBelehnung:0.2f}%")
-    Amortisationsbetragprojahr.setText(f"Amortisation pro Jahr = CHF {zAmortisationsbetragprojahr:0.0f}")
+    # Amortisationsbetragprojahr.setText(f"Amortisation pro Jahr = CHF {zAmortisationsbetragprojahr:0.0f}")
+    Amortisationstext = "Amortisation pro Jahr = CHF " + locale.format ("%d", zAmortisationsbetragprojahr, grouping = True)
+    Amortisationsbetragprojahr.setText(Amortisationstext)
   
     Tragbarkeit
     if ztragbarkeit > 33:
         show_warning_messagebox2()
-        return
+        Tragbarkeit.setStyleSheet("color : red")
+    else:
+        Tragbarkeit.setStyleSheet("color : green")
+        #return
 
     Belehnung
     if zBelehnung > 80:
        show_warning_messagebox3()
-       return    
+       Belehnung.setStyleSheet("color : red")
+    else:
+        Belehnung.setStyleSheet("color : green")
+        #return    
 
 #def amortisation (betragprojahr):
     #if Amortisationsbetrag > 0:
