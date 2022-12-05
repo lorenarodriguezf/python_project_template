@@ -93,9 +93,9 @@ def pushbutton ():
   
     
     #Tragbarkeit
-    if ztragbarkeit > "33.0":
-        show_warning_messagebox2()
-        return
+    #if ztragbarkeit > "33.0":
+        #show_warning_messagebox2()
+        #return
 
     
 
