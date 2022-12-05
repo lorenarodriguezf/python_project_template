@@ -46,15 +46,14 @@ Amortisationsbetragprojahr = QLabel()
        # print ("Es sind nicht alle notwendigen Felder ausgefüllt")
 
 def pushbutton ():
-    if kaufpreis.text() == "" or einkommen.text() == "" or eigenmittel.text() == "":
-       return
-    zkaufpreis = kaufpreis.text()
-    zeinkommen = einkommen.text()
-    zeigenmittel = eigenmittel.text()
-    #Warnmeldungen
+    # warnmeldungen
     if kaufpreis.text() == "" or einkommen.text() == "" or eigenmittel.text() == "":
         show_warning_messagebox()
         return
+    zkaufpreis = kaufpreis.text()
+    zeinkommen = einkommen.text()
+    zeigenmittel = eigenmittel.text()
+    #Warnmeldungen  
     # neue Variable "z" definieren, da ansonsten ein Wert definiert wird, der noch nicht vorhanden ist --> kaufpreis.text greift den definierten Wert von oben auf, der neu in eine Zahl umgewandelt werden soll.
     zkaufpreis = int(zkaufpreis)
     zeinkommen = int(zeinkommen)
@@ -83,9 +82,9 @@ def pushbutton ():
   
     
         #belehnungs_wert = ......
-    if Tragbarkeit > "100":
-        show_warning_messagebox()
-        return
+    #²if Tragbarkeit > "100":
+       # show_warning_messagebox()
+        #return
 
     
 
