@@ -23,13 +23,19 @@ layout.addRow("Jährliches Einkommen:", einkommen)
 layout.addRow("Eigenmittel:", eigenmittel)
 #Signals & Slots -> Pushbutton (In der Funktion definieren - Berechnung und Validierung / on button click verbinden mit Funktion)
 button = QPushButton ("Berechnen")
+Hypothek = QLabel()
+Belehnung = QLabel()
+Tragbarkeit = QLabel()
+Amortisationsbetragprojahr = QLabel()
+
 #button.clicked.connect(function) --> Notwendig, um Funktion mit "Push the button" zu verbinden
 
 #def pushbutton ():
-    #if kaufpreis.text() == "" or einkommen.text() == "" or eigenmittel.text() == "":
        # print ("Es sind nicht alle notwendigen Felder ausgefüllt")
 
 def pushbutton ():
+    if kaufpreis.text() == "" or einkommen.text() == "" or eigenmittel.text() == "":
+       return
     zkaufpreis = kaufpreis.text()
     zeinkommen = einkommen.text()
     zeigenmittel = eigenmittel.text()
@@ -38,25 +44,31 @@ def pushbutton ():
     zeinkommen = int(zeinkommen)
     zeigenmittel = int(zeigenmittel)
     #Berechnungen 
-    Hypothek = zkaufpreis - zeigenmittel
-    Belehnung = ((zkaufpreis-zeigenmittel) / zkaufpreis) *100
+    zHypothek = zkaufpreis - zeigenmittel
+    zBelehnung = ((zkaufpreis-zeigenmittel) / zkaufpreis) *100
     Hypothek1 = zkaufpreis * 0.666
     #Tragbarkeitsberechnung
-    Tragbarkeit = 0
-    Amortisationsbetragprojahr = 0
-    if Hypothek1 >= Hypothek:
-        Tragbarkeit = (Hypothek * 0.0475 + zkaufpreis * 0.01)/zeinkommen 
+    ztragbarkeit = 0
+    zAmortisationsbetragprojahr = 0
+    if Hypothek1 >= zHypothek:
+        ztragbarkeit = (zHypothek * 0.0475 + zkaufpreis * 0.01)/zeinkommen 
         print ("Es ist keine Amortisation notwendig")
     else: 
-        Amortisationsbetrag = Hypothek - Hypothek1
-        Amortisationsbetragprojahr = Amortisationsbetrag / 15
-        Tragbarkeit = (Hypothek1 * 0.0475 + Amortisationsbetrag * 0.0525 + zkaufpreis *0.01 + Amortisationsbetragprojahr) /zeinkommen 
-    Tragbarkeit = Tragbarkeit*100
+        Amortisationsbetrag = zHypothek - Hypothek1
+        zAmortisationsbetragprojahr = Amortisationsbetrag / 15
+        ztragbarkeit = (Hypothek1 * 0.0475 + Amortisationsbetrag * 0.0525 + zkaufpreis *0.01 + zAmortisationsbetragprojahr) /zeinkommen 
+    ztragbarkeit = ztragbarkeit*100
+
+    #belehnungstext = ("Belehnung = ", Belehnung)
+    Hypothek.setText(f"Hypothek = CHF {zHypothek}")
+    Tragbarkeit.setText(f"Tragbarkeit = {ztragbarkeit}%")
+    Belehnung.setText(f"Belehnung = {zBelehnung}%")
+    Amortisationsbetragprojahr.setText(f"Amortisation pro Jahr = CHF {zAmortisationsbetragprojahr}")
+  
+    
         #belehnungs_wert = ......
  
 
-    # Resultate in UI einfügen
-    #belehnung.setText(.....)
     
 
 #def amortisation (betragprojahr):
@@ -64,15 +76,22 @@ def pushbutton ():
        # return (Amortisationsbetrag / 15)
     #else:
         #return ("Es ist keine Amortisation notwendig")
-    print(Hypothek)
-    print(Belehnung, "%")
-    print(Amortisationsbetragprojahr)
-    print(Tragbarkeit, "%")
+    print("Hypothek = CHF", Hypothek)
+    print("Belehnung = ", Belehnung, "%")
+    print("Amortisation pro Jahr = CHF", Amortisationsbetragprojahr)
+    print("Tragbarkeit = ", Tragbarkeit, "%")
 
+
+    
+
+layout.addRow(Hypothek)
+layout.addRow(Belehnung)
+layout.addRow(Amortisationsbetragprojahr)
+layout.addRow(Tragbarkeit)
 #wenn man Zeichenkette mit% möchte dann f string
 
 button.clicked.connect (pushbutton)
-Hypothek = QLabel("Hypothek")
+# Hypothek.setAlignment(Qt.Aligncenter)
 layout.addWidget(button)
 window.setLayout(layout)
 window.setLayout(layout)
