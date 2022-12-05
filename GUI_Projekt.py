@@ -22,7 +22,7 @@ layout.addRow("Kaufpreis:", kaufpreis)
 layout.addRow("Jährliches Einkommen:", einkommen)
 layout.addRow("Eigenmittel:", eigenmittel)
 #Warnmeldung
-def show_warning_messagebox():
+def show_warning_messagebox1():
     msg = QMessageBox()
     msg.setIcon(QMessageBox.Warning)
     # setting message for Message Box
@@ -33,6 +33,28 @@ def show_warning_messagebox():
     msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel) 
     # start the app
     retval = msg.exec_()
+def show_warning_messagebox2():
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Warning)
+    # setting message for Message Box
+    msg.setText("Die Tragbarkeit ist nicht gegeben.")
+    # setting Message box window title
+    msg.setWindowTitle("Warnung")  
+    # declaring buttons on Message Box
+    msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel) 
+    # start the app
+    retval = msg.exec_()
+def show_warning_messagebox3():
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Warning)
+    # setting message for Message Box
+    msg.setText("Die Belehnung ist über 80%.")
+    # setting Message box window title
+    msg.setWindowTitle("Warnung")  
+    # declaring buttons on Message Box
+    msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel) 
+    # start the app
+    retval = msg.exec_()    
 #Signals & Slots -> Pushbutton (In der Funktion definieren - Berechnung und Validierung / on button click verbinden mit Funktion)
 button = QPushButton ("Berechnen")
 Hypothek = QLabel()
@@ -48,7 +70,7 @@ Amortisationsbetragprojahr = QLabel()
 def pushbutton ():
     # warnmeldungen
     if kaufpreis.text() == "" or einkommen.text() == "" or eigenmittel.text() == "":
-        show_warning_messagebox()
+        show_warning_messagebox1()
         return
     zkaufpreis = kaufpreis.text()
     zeinkommen = einkommen.text()
@@ -57,7 +79,7 @@ def pushbutton ():
     # neue Variable "z" definieren, da ansonsten ein Wert definiert wird, der noch nicht vorhanden ist --> kaufpreis.text greift den definierten Wert von oben auf, der neu in eine Zahl umgewandelt werden soll.
     zkaufpreis = int(zkaufpreis)
     zeinkommen = int(zeinkommen)
-    zeigenmittel = int(zeigenmittel)    
+    zeigenmittel = int(zeigenmittel)
     #Berechnungen 
     zHypothek = zkaufpreis - zeigenmittel
     zBelehnung = ((zkaufpreis-zeigenmittel) / zkaufpreis) *100
@@ -80,13 +102,15 @@ def pushbutton ():
     Belehnung.setText(f"Belehnung = {zBelehnung:0.2f}%")
     Amortisationsbetragprojahr.setText(f"Amortisation pro Jahr = CHF {zAmortisationsbetragprojahr:0.0f}")
   
-    
-        #belehnungs_wert = ......
-    #²if Tragbarkeit > "100":
-       # show_warning_messagebox()
-        #return
+    Tragbarkeit
+    if ztragbarkeit > 33:
+        show_warning_messagebox2()
+        return
 
-    
+    Belehnung
+    if zBelehnung > 80:
+       show_warning_messagebox3()
+       return    
 
 #def amortisation (betragprojahr):
     #if Amortisationsbetrag > 0:
@@ -97,7 +121,6 @@ def pushbutton ():
     print("Belehnung = ", Belehnung, "%")
     print("Amortisation pro Jahr = CHF", Amortisationsbetragprojahr)
     print("Tragbarkeit = ", Tragbarkeit, "%")
-
 
     
 
