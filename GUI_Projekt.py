@@ -43,6 +43,17 @@ def show_warning_messagebox2():
     # declaring buttons on Message Box
     msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel) 
     # start the app
+    retval = msg.exec_()
+def show_warning_messagebox3():
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Warning)
+    # setting message for Message Box
+    msg.setText("Die Belehnung ist über 80%.")
+    # setting Message box window title
+    msg.setWindowTitle("Warnung")  
+    # declaring buttons on Message Box
+    msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel) 
+    # start the app
     retval = msg.exec_()    
 #Signals & Slots -> Pushbutton (In der Funktion definieren - Berechnung und Validierung / on button click verbinden mit Funktion)
 button = QPushButton ("Berechnen")
@@ -91,13 +102,15 @@ def pushbutton ():
     Belehnung.setText(f"Belehnung = {zBelehnung}%")
     Amortisationsbetragprojahr.setText(f"Amortisation pro Jahr = CHF {zAmortisationsbetragprojahr}")
   
-    
-    #Tragbarkeit
-    #if ztragbarkeit > "33.0":
-        #show_warning_messagebox2()
-        #return
+    Tragbarkeit
+    if ztragbarkeit > 33:
+        show_warning_messagebox2()
+        return
 
-    
+    Belehnung
+    if zBelehnung > 80:
+       show_warning_messagebox3()
+       return    
 
 #def amortisation (betragprojahr):
     #if Amortisationsbetrag > 0:
