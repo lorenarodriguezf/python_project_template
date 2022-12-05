@@ -52,18 +52,11 @@ def pushbutton ():
         Amortisationsbetragprojahr = Amortisationsbetrag / 15
         Tragbarkeit = (Hypothek1 * 0.0475 + Amortisationsbetrag * 0.0525 + zkaufpreis *0.01 + Amortisationsbetragprojahr) /zeinkommen 
     Tragbarkeit = Tragbarkeit*100
-        #belehnungs_wert = ......
  
 
-    # Resultate in UI einfügen
+# Resultate in UI einfügen
     #belehnung.setText(.....)
     
-
-#def amortisation (betragprojahr):
-    #if Amortisationsbetrag > 0:
-       # return (Amortisationsbetrag / 15)
-    #else:
-        #return ("Es ist keine Amortisation notwendig")
     print(Hypothek)
     print(Belehnung, "%")
     print(Amortisationsbetragprojahr)
