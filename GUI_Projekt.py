@@ -75,10 +75,10 @@ def pushbutton ():
     ztragbarkeit = ztragbarkeit*100
 
     #belehnungstext = ("Belehnung = ", Belehnung)
-    Hypothek.setText(f"Hypothek = CHF {zHypothek}")
-    Tragbarkeit.setText(f"Tragbarkeit = {ztragbarkeit}%")
-    Belehnung.setText(f"Belehnung = {zBelehnung}%")
-    Amortisationsbetragprojahr.setText(f"Amortisation pro Jahr = CHF {zAmortisationsbetragprojahr}")
+    Hypothek.setText(f"Hypothek = CHF {zHypothek:0.0f}")
+    Tragbarkeit.setText(f"Tragbarkeit = {ztragbarkeit:0.2f}%")
+    Belehnung.setText(f"Belehnung = {zBelehnung:0.2f}%")
+    Amortisationsbetragprojahr.setText(f"Amortisation pro Jahr = CHF {zAmortisationsbetragprojahr:0.0f}")
   
     
         #belehnungs_wert = ......
@@ -101,15 +101,17 @@ def pushbutton ():
 
     
 
+
+#wenn man Zeichenkette mit% möchte dann f string
+
+button.clicked.connect (pushbutton)
+
+# Hypothek.setAlignment(Qt.Aligncenter)
+layout.addWidget(button)
 layout.addRow(Hypothek)
 layout.addRow(Belehnung)
 layout.addRow(Amortisationsbetragprojahr)
 layout.addRow(Tragbarkeit)
-#wenn man Zeichenkette mit% möchte dann f string
-
-button.clicked.connect (pushbutton)
-# Hypothek.setAlignment(Qt.Aligncenter)
-layout.addWidget(button)
 window.setLayout(layout)
 window.setLayout(layout)
 window.show()
