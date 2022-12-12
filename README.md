@@ -36,6 +36,9 @@ included in the project template):
 
 ## Um berechnen zu können, ob eine Hypothek für den Kreditnehmer tragbar ist, müssen Kaufpreis, Eigenmittel und Einkommen abgefüllt werden. Mittels Pushbutton werden die notwendigen Berechnungen aufgeführt und falls notwendig Fehlermeldungen an den User zurück gemeldet.
 
+![Draft für GUI](https://github.com/lorenarodriguezf/python_project_template/blob/183cf270881d0856eb039c3af4f7efba93423db3/WhatsApp%20Image%202022-11-25%20at%2016.07.16.jpeg)
+![Draft für Berechnungen](https://github.com/lorenarodriguezf/python_project_template/blob/183cf270881d0856eb039c3af4f7efba93423db3/WhatsApp%20Image%202022-11-25%20at%2016.07.17.jpeg)
+
 Explain any high level concepts that you are using in your software. What were
 your ideas for creating the whole software? What might not be apparent from the
 sources alone? You can also add diagrams, photos of whiteboards or flipcharts
