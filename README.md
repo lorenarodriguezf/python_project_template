@@ -10,7 +10,7 @@ or [GitLab markdown notation](https://docs.gitlab.com/ee/user/markdown.html) in
 case you are using one of these platforms. This will give a nicely formatted
 documentation when looking at your project online.
 
-## -	Einfacher Hypothekarrechner, der berechnet, ob eine Hypothek bei gegebenem Kaufpreis, Einkommen und Eigenmittel möglich ist
+- Einfacher Hypothekarrechner, der berechnet, ob eine Hypothek bei gegebenem Kaufpreis, Einkommen und Eigenmittel möglich ist
 - Rückmeldung an User, ob Hypothek tragbar ist oder nicht und ob Belehnung i.O. ist
 - Anzeige von Hypothek, Tragbarkeit, Belehnung und Amortisation
 - Bewusste Einschränkung der Funktionalitäten: Keine Berücksichtigung des Alters (Auswirkungen auf Amortisation), Art der Eigenmittel und keine Abdeckung für Ablösung von Hypotheken
