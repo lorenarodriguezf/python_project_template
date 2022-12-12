@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QValidator, QIntValidator
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QPushButton, QVBoxLayout, QFormLayout, QLineEdit, QMessageBox
 app = QApplication([])
-app.setStyle('Windows')
+app.setStyle('Fusion')
 locale.setlocale(locale.LC_ALL, "de_CH")
 palette = QPalette()
 palette.setColor(QPalette.ButtonText, Qt.blue)
