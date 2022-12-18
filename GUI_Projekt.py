@@ -1,152 +1,166 @@
+import sys
 import PyQt5
 import locale
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QValidator, QIntValidator
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QPushButton, QVBoxLayout, QFormLayout, QLineEdit, QMessageBox
-app = QApplication([])
-app.setStyle('Fusion')
-locale.setlocale(locale.LC_ALL, "de_CH")
-palette = QPalette()
-palette.setColor(QPalette.ButtonText, Qt.blue)
-app.setPalette(palette)
-window = QWidget() #(main Window)
-window.setWindowTitle("Hypthekenrechner Gruppe Mix")
-window.setGeometry(600, 600, 480, 180)
-layout = QFormLayout()
-kaufpreis = QLineEdit()
-#on changed oder ähnliches für QlineEdit checken
-kaufpreis.setValidator (QIntValidator (1, 10000000, kaufpreis))
-einkommen = QLineEdit()
-einkommen.setValidator(QIntValidator (1, 20000000, einkommen))
-eigenmittel = QLineEdit()
-eigenmittel.setValidator (QIntValidator (1, 10000000, eigenmittel))
-layout.addRow("Kaufpreis:", kaufpreis)
-layout.addRow("Jährliches Einkommen:", einkommen)
-layout.addRow("Eigenmittel:", eigenmittel)
-#Warnmeldung
-def show_warning_messagebox1():
-    msg = QMessageBox()
-    msg.setIcon(QMessageBox.Warning)
-    # setting message for Message Box
-    msg.setText("Es sind nicht alle notwendigen Felder ausgefüllt")
-    # setting Message box window title
-    msg.setWindowTitle("Warnung")  
-    # declaring buttons on Message Box
-    msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel) 
-    # start the app
-    retval = msg.exec_()
-def show_warning_messagebox2():
-    msg = QMessageBox()
-    msg.setIcon(QMessageBox.Warning)
-    # setting message for Message Box
-    msg.setText("Die Tragbarkeit ist nicht gegeben.")
-    # setting Message box window title
-    msg.setWindowTitle("Warnung")  
-    # declaring buttons on Message Box
-    msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel) 
-    # start the app
-    retval = msg.exec_()
-def show_warning_messagebox3():
-    msg = QMessageBox()
-    msg.setIcon(QMessageBox.Warning)
-    # setting message for Message Box
-    msg.setText("Die Belehnung ist über 80%.")
-    # setting Message box window title
-    msg.setWindowTitle("Warnung")  
-    # declaring buttons on Message Box
-    msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel) 
-    # start the app
-    retval = msg.exec_()    
-#Signals & Slots -> Pushbutton (In der Funktion definieren - Berechnung und Validierung / on button click verbinden mit Funktion)
-button = QPushButton ("Berechnen")
-Hypothek = QLabel()
-Belehnung = QLabel()
-Tragbarkeit = QLabel()
-Amortisationsbetragprojahr = QLabel()
-#button.clicked.connect(function) --> Notwendig, um Funktion mit "Push the button" zu verbinden
 
-#def pushbutton ():
-       # print ("Es sind nicht alle notwendigen Felder ausgefüllt")
+class Calculation:
+    """Berechnung der Hypothek, Amortisation, Tragbarkeit und Belehnung"""
+    
+    def __init__(self, kaufpreis, einkommen, eigenmittel):
+        """Initialisiert Calculation mit notwendigen Inputparameter"""
+        self.kaufpreis = kaufpreis
+        self.einkommen = einkommen
+        self.eigenmittel = eigenmittel
 
-def pushbutton ():
-    # warnmeldungen
-    if kaufpreis.text() == "" or einkommen.text() == "" or eigenmittel.text() == "":
-        show_warning_messagebox1()
-        return
-    zkaufpreis = kaufpreis.text()
-    zeinkommen = einkommen.text()
-    zeigenmittel = eigenmittel.text()
-    #Warnmeldungen  
-    # neue Variable "z" definieren, da ansonsten ein Wert definiert wird, der noch nicht vorhanden ist --> kaufpreis.text greift den definierten Wert von oben auf, der neu in eine Zahl umgewandelt werden soll.
-    zkaufpreis = int(zkaufpreis)
-    zeinkommen = int(zeinkommen)
-    zeigenmittel = int(zeigenmittel)
-    #Berechnungen 
-    zHypothek = zkaufpreis - zeigenmittel
-    zBelehnung = ((zkaufpreis-zeigenmittel) / zkaufpreis) *100
-    Hypothek1 = zkaufpreis * 0.666
-    #Tragbarkeitsberechnung
-    ztragbarkeit = 0
-    zAmortisationsbetragprojahr = 0
-    if Hypothek1 >= zHypothek:
-        ztragbarkeit = (zHypothek * 0.0475 + zkaufpreis * 0.01)/zeinkommen 
-        print ("Es ist keine Amortisation notwendig")
-    else: 
-        Amortisationsbetrag = zHypothek - Hypothek1
-        zAmortisationsbetragprojahr = Amortisationsbetrag / 15
-        ztragbarkeit = (Hypothek1 * 0.0475 + Amortisationsbetrag * 0.0525 + zkaufpreis *0.01 + zAmortisationsbetragprojahr) /zeinkommen 
-    ztragbarkeit = ztragbarkeit*100
+    def berechne_hypothek(self):
+        """Betrag wird als Zahl zurückgegeben"""
+        return self.kaufpreis - self.eigenmittel
+        
+    def berechne_erstehypothek(self):
+        return self.kaufpreis * 0.666
 
-    #belehnungstext = ("Belehnung = ", Belehnung)
-    #Hypothek.setText(f"Hypothek = CHF {zHypothek:0.0f}")
-    Hypothektext = "Hypothek = CHF " + locale.format ("%d", zHypothek, grouping = True)
-    Hypothek.setText(Hypothektext)
-    Tragbarkeit.setText(f"Tragbarkeit = {ztragbarkeit:0.2f}%")
-    Belehnung.setText(f"Belehnung = {zBelehnung:0.2f}%")
-    # Amortisationsbetragprojahr.setText(f"Amortisation pro Jahr = CHF {zAmortisationsbetragprojahr:0.0f}")
-    Amortisationstext = "Amortisation pro Jahr = CHF " + locale.format ("%d", zAmortisationsbetragprojahr, grouping = True)
-    Amortisationsbetragprojahr.setText(Amortisationstext)
-  
-    Tragbarkeit
-    if ztragbarkeit > 33:
-        show_warning_messagebox2()
-        Tragbarkeit.setStyleSheet("color : red")
-    else:
-        Tragbarkeit.setStyleSheet("color : green")
-        #return
+    def berechne_amortisation(self):
+        hypothek = self.berechne_hypothek()
+        hypothek1 = self.berechne_erstehypothek()
+        return hypothek - hypothek1
 
-    Belehnung
-    if zBelehnung > 80:
-       show_warning_messagebox3()
-       Belehnung.setStyleSheet("color : red")
-    else:
-        Belehnung.setStyleSheet("color : green")
-        #return    
+    def berechne_amortisationsbetragprojahr(self):
+        return self.berechne_amortisation() / 15
 
-#def amortisation (betragprojahr):
-    #if Amortisationsbetrag > 0:
-       # return (Amortisationsbetrag / 15)
-    #else:
-        #return ("Es ist keine Amortisation notwendig")
-    print("Hypothek = CHF", Hypothek)
-    print("Belehnung = ", Belehnung, "%")
-    print("Amortisation pro Jahr = CHF", Amortisationsbetragprojahr)
-    print("Tragbarkeit = ", Tragbarkeit, "%")
+    def berechne_tragbarkeit(self):
+        hypothek = self.berechne_hypothek()
+        hypothek1 = self.berechne_erstehypothek()
+        if hypothek1 >= hypothek:
+            return (hypothek * 0.0475 + self.kaufpreis * 0.01) / self.einkommen
+        else: 
+            amortisationsbetrag = self.berechne_amortisation()
+            amortisationsbetragprojahr = self.berechne_amortisationsbetragprojahr()
+            return ((hypothek1 * 0.0475 + amortisationsbetrag * 0.0525 + self.kaufpreis *0.01 + amortisationsbetragprojahr) / self.einkommen) * 100
+
+    def berechne_belehnung(self):
+        return ((self.kaufpreis - self.eigenmittel) / self.kaufpreis) *100
 
     
+class Formatierung:
+    """Formatiert Werte in Währungsdarstellung oder Prozentdarstellung"""
+
+    def __init__(self):
+        locale.setlocale(locale.LC_ALL, "de_CH")
+
+    def betrag(self, zahl):
+        """Formatiert eine Zahl in Währungstext"""
+        return locale.format_string("CHF %d", zahl, grouping = True)
+
+    def prozent(self, zahl):
+        """Formatiert eine Zahl in Prozenttext"""
+        return f"{zahl:0.2f}%"
 
 
-#wenn man Zeichenkette mit% möchte dann f string
+class Fehlermeldung:
+    """Zeigt verschiedene Fehlermeldungstypen an."""
 
-button.clicked.connect (pushbutton)
+    def __init__(self):
+        self.msg = QMessageBox()
+        self.msg.setIcon(QMessageBox.Warning)
+        self.msg.setWindowTitle("Warnung")  
+        self.msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel) 
 
-# Hypothek.setAlignment(Qt.Aligncenter)
-layout.addWidget(button)
-layout.addRow(Hypothek)
-layout.addRow(Belehnung)
-layout.addRow(Amortisationsbetragprojahr)
-layout.addRow(Tragbarkeit)
-window.setLayout(layout)
-window.setLayout(layout)
-window.show()
-app.exec()
+    def fehlermeldung_anzeigen(self, fehlermeldung):
+        self.msg.setText(fehlermeldung)
+        self.msg.exec_()
+
+
+class Hyporechner(QWidget):
+    """
+        Layout minimaler Hypothekarrechner
+        Inspiration von: https://pythonspot.com/pyqt5-buttons/
+    """
+
+    def __init__(self):
+        super().__init__()
+
+        # Eingabefelder
+        self.kaufpreis = QLineEdit()
+        self.einkommen = QLineEdit()
+        self.eigenmittel = QLineEdit()
+        # Ausgabefelder
+        self.hypothek = QLabel()
+        self.tragbarkeit = QLabel()
+        self.amortisation = QLabel()
+        self.belehnung = QLabel()
+        self.button = QPushButton ("Berechnen")
+
+        self.kaufpreis.setValidator (QIntValidator (1, 10000000, self.kaufpreis))
+        self.einkommen.setValidator(QIntValidator (1, 20000000, self.einkommen))
+        self.eigenmittel.setValidator (QIntValidator (1, 10000000, self.eigenmittel))
+        #button.clicked.connect(function) --> Notwendig, um Funktion mit "Push the button" zu verbinden
+        self.button.clicked.connect(self.pushaction)
+        
+        layout = QFormLayout()
+        layout.addRow("Kaufpreis:", self.kaufpreis)
+        layout.addRow("Jährliches Einkommen:", self.einkommen)
+        layout.addRow("Eigenmittel:", self.eigenmittel)
+        layout.addWidget(self.button)
+        layout.addRow(self.hypothek)
+        layout.addRow(self.tragbarkeit)
+        layout.addRow(self.amortisation)
+        layout.addRow(self.belehnung)
+
+        palette = QPalette()
+        palette.setColor(QPalette.ButtonText, Qt.blue)
+
+        self.setWindowTitle("Hypthekenrechner Gruppe Mix")
+        self.setGeometry(600, 600, 480, 180)
+        self.setLayout(layout)
+        self.setPalette(palette)
+        self.show()
+
+    def pushaction(self):
+        fehlerObj = Fehlermeldung()
+
+        if self.kaufpreis.text() == "" or self.einkommen.text() == "" or self.eigenmittel.text() == "":
+            fehlerObj.fehlermeldung_anzeigen("Es sind nicht alle notwendigen Felder ausgefüllt.")
+            return
+
+        # Eingabefelder auslesen
+        kaufpreis = int(self.kaufpreis.text())
+        einkommen = int(self.eigenmittel.text())
+        eigenmittel = int(self.eigenmittel.text())
+
+        #Objekte für die Verarbeitung instanzieren
+        calculationObj = Calculation(kaufpreis, einkommen, eigenmittel)
+        formatierungObj = Formatierung()
+
+        hypobetrag = calculationObj.berechne_hypothek()
+        self.hypothek.setText("Hypothek = " + formatierungObj.betrag(hypobetrag))
+
+        #Berechnung Belehnung
+        belehnung = calculationObj.berechne_belehnung()
+        self.belehnung.setStyleSheet("color : green")
+        if belehnung > 80:
+            fehlerObj.fehlermeldung_anzeigen("Die Belehnung ist über 80%.")
+            self.belehnung.setStyleSheet("color : red")
+        self.belehnung.setText("Belehnung = " + formatierungObj.prozent(belehnung))
+
+        #Berechne Trabgarkeit
+        tragbarkeit = calculationObj.berechne_tragbarkeit()
+        self.tragbarkeit.setStyleSheet("color : green")
+        if tragbarkeit > 33:
+            fehlerObj.fehlermeldung_anzeigen("Die Tragbarkeit ist nicht gegeben.")
+            self.tragbarkeit.setStyleSheet("color : red")
+        self.tragbarkeit.setText("Tragbarkeit = " + formatierungObj.prozent(tragbarkeit))
+        
+        #Berechnung Amortisation
+        amortisation_pro_jahr = calculationObj.berechne_amortisationsbetragprojahr()
+        self.amortisation.setText("Amortisation pro Jahr = " + formatierungObj.betrag(amortisation_pro_jahr))
+
+def main():
+    app = QApplication(sys.argv)
+    app.setStyle('Fusion')
+    hypowindow = Hyporechner()
+    sys.exit(app.exec())
+
+if __name__ == "__main__":
+   main()

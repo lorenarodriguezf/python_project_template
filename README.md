@@ -5,6 +5,19 @@
 - Anzeige von Hypothek, Tragbarkeit, Belehnung und Amortisation
 - Bewusste Einschränkung der Funktionalitäten: Keine Berücksichtigung des Alters (Auswirkungen auf Amortisation), Art der Eigenmittel und keine Abdeckung für Ablösung von Hypotheken
 
+## Start aus der Konsole
+python GUI_Projekt.py
+
+## Test von Calculationobjekt auf pythoninteraktiven Konsole
+1. Schritt: 
+python -i GUI_Projekt.py
+
+2. Schritt
+calc = Calculation(1000000, 250000, 120000)
+calc.berechne_hypothek()
+
+3. Schritt
+exit()
 
 ## Um mit dem Projekt zu starten, muss das Haupt Python File geöffnet werden:
 ``
